@@ -61,6 +61,7 @@ class BarangController extends Controller
 
     public function hapusdata(Request $request, $id) {
         Barang::destroy($id);
-        return redirect('lihatbarang')->with('flash_message', 'Item deleted');
+        return redirect()->route('barang.index')->with('flash_message', 'Item dihapus');
     }
+    
 }

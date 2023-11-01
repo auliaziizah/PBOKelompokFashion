@@ -52,7 +52,7 @@
                     <td>{{ $row->ukuran }}</td>
                     <td>{{ $row->status }}</td>
                     <td>
-                        <button type="button" class="btn btn-danger">Delete</button>
+                        <a href="/hapusdata/{{ $row->id }}" type="button" class="btn btn-danger delete" data-id="{{ $row->id }}">Delete</a>
                         <a href="/updatedata/{{ $id++ }}" class="btn btn-info">Edit</a>
                     </td>
                 </tr>
