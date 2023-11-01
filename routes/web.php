@@ -50,10 +50,9 @@ Route::group(['prefix' => 'dashboard/admin'], function () {
             Route::get('/lihatbarang', [BarangController::class, 'index'])->name('lihatbarang');
             Route::post('/insertdata', [BarangController::class, 'insertdata'])->name('insertdata');
             Route::get('/tambahdatabarang', [BarangController::class, 'tambahdatabarang'])->name('tambahdatabarang');
-            
             Route::get('/updatedata/{id}', [BarangController::class, 'updatedata'])->name('updatedata');
             Route::post('/editdata/{id}', [BarangController::class, 'editdata'])->name('editdata');
-
+            Route::get('/hapusdata/{id}', [BarangController::class, 'hapusdata'])->name('hapusdata');
     });
 
     

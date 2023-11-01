@@ -57,7 +57,7 @@
                     <td>{{ $row->stok }}</td>
                     <td>{{ $row->deskripsi }}</td>
                     <td>
-                        <button type="button" class="btn btn-danger">Delete</button>
+                        <a href="{{ route('barang.hapusdata', ['id' => $row->id]) }}" class="btn btn-danger">Delete</a>
                         <a href="{{ route('barang.updatedata', ['id' => $row->id]) }}" class="btn btn-info">Edit</a>
                     </td>
                 </tr>

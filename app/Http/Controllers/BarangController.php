@@ -58,6 +58,9 @@ class BarangController extends Controller
         return redirect()->route('barang.tambahdatabarang')->with('success', 'Data berhasil di update');
 
     }
-    
 
+    public function hapusdata(Request $request, $id) {
+        Barang::destroy($id);
+        return redirect('lihatbarang')->with('flash_message', 'Item deleted');
+    }
 }
