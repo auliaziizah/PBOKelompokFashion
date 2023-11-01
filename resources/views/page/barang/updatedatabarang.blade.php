@@ -28,35 +28,35 @@
       <div class="col-8">
         <div class="card">
           <div class="card-body">
-            <form action="{{ route('barang.insertdata') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('barang.editdata', ['id' => $data->id]) }}" method="POST" enctype="multipart/form-data">
               @csrf
               <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Nama Barang</label>
-                <input type="text" name="nama_barang" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input type="text" name="nama_barang" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $data->nama_barang }}">
               </div>
               <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Harga</label>
-                <input type="number" name="harga" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input type="number" name="harga" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $data->harga }}">
               </div>
               <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Ukuran</label>
-                <input type="text" name="ukuran" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input type="text" name="ukuran" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $data->ukuran }}">
               </div>
               <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Bahan</label>
-                <input type="text" name="bahan" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input type="text" name="bahan" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $data->bahan }}">
               </div>
               <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Brand</label>
-                <input type="text" name="brand" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input type="text" name="brand" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $data->brand }}">
               </div>
               <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Stok</label>
-                <input type="text" name="stok" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input type="text" name="stok" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $data->stok }}">
               </div>
               <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Deskripsi</label>
-                <input type="text" name="deskripsi" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input type="text" name="deskripsi" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $data->deskripsi }}">
               </div>
               <button class="btn btn-info" type="submit">Submit</button>
               <a href="{{ route('barang.index') }}" class="btn btn-success">Data</a>

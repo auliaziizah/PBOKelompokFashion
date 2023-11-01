@@ -18,17 +18,17 @@
     <div class="container">
         <div class="row g-3 align-items-center mb-1">
             <div class="col-auto">
-                <form action="/tabelbarang" method="GET">
+                <form action="/tambahdatabarang" method="GET">
                     <input type="search" id="inputPassword6" name="search" class="form-control" aria-describedby="passwordHelpInline">
                 </form>
             </div>
         </div>
         <div class="row">
-            {{-- @if ($message = Session::get('success'))
+            @if ($message = Session::get('success'))
                     <div class="alert alert-success" role="alert">
                         {{ $message }}
         </div>
-        @endif --}}
+        @endif
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -36,8 +36,10 @@
                     <th scope="col">Nama Barang</th>
                     <th scope="col">Harga</th>
                     <th scope="col">Ukuran</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Aksi</th>
+                    <th scope="col">Bahan</th>
+                    <th scope="col">Brand</th>
+                    <th scope="col">Stok</th>
+                    <th scope="col">Deskripsi</th>
                 </tr>
             </thead>
             <tbody>
@@ -50,14 +52,17 @@
                     <td>{{ $row->nama_barang }}</td>
                     <td>Rp {{ $row->harga }}</td>
                     <td>{{ $row->ukuran }}</td>
-                    <td>{{ $row->status }}</td>
+                    <td>{{ $row->bahan }}</td>
+                    <td>{{ $row->brand }}</td>
+                    <td>{{ $row->stok }}</td>
+                    <td>{{ $row->deskripsi }}</td>
                     <td>
                         <button type="button" class="btn btn-danger">Delete</button>
-                        <button type="button" class="btn btn-info">Edit</button>
+                        <a href="{{ route('barang.updatedata', ['id' => $row->id]) }}" class="btn btn-info">Edit</a>
                     </td>
                 </tr>
-                <a href="{{ route('tambahdatabarang') }}" class="btn btn-success">Tambah data</a>
                         @endforeach
+                    <a href="{{ route('barang.tambahdatabarang') }}" class="btn btn-success">Tambah data</a>
                     </tbody>
                 </table>
             </div>

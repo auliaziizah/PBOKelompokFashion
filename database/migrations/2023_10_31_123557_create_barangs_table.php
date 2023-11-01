@@ -18,7 +18,10 @@ return new class extends Migration
             $table->string('nama_barang');
             $table->bigInteger('harga');
             $table->string('ukuran');
-            $table->string('status');
+            $table->string('bahan');
+            $table->string('brand');
+            $table->string('stok');
+            $table->string('deskripsi');
             $table->timestamps();
         });
     }
