@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\AkunController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AkunController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BarangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,5 +40,17 @@ Route::group(['prefix' => 'dashboard/admin'], function () {
             Route::match(['get','post'],'tambah', 'tambahAkun')->name('add');
             Route::match(['get','post'],'{id}/ubah', 'ubahAkun')->name('edit');
             Route::delete('{id}/hapus', 'hapusAkun')->name('delete');
-        });
+    });
+
+    Route::controller(BarangController::class)
+        ->prefix('barang')
+        ->as('barang.')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/lihatbarang', [BarangController::class, 'index'])->name('lihatbarang');
+            Route::post('/insertdata', [BarangController::class, 'insertdata'])->name('insertdata');
+            Route::post('/tambahdatabarang', [BarangController::class, 'tambahdatabarang'])->name('tambahdatabarang');
+    });
+
+    
 });
