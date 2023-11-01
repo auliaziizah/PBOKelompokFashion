@@ -9,10 +9,10 @@ class BarangController extends Controller
 {
     public function index(){
         $data = Barang::all();
-        return view('page.barang.tabelbarang', compact('data'));
+        return view('barang.tabelbarang', compact('data'));
     }
     public function tambahdatabarang(){
-        return view('page.barang.databarang');
+        return view('barang.databarang');
     }
 
     public function insertdata(Request $request){
@@ -23,21 +23,23 @@ class BarangController extends Controller
         return redirect()->route('tambahdatabarang', ['id' => $dataId])->with('success', 'Data Berhasil di Simpan');
     }
 
-    public function store(Request $request)
-    {
-        // Validasi data yang diterima dari formulir
-        $validatedData = $request->validate([
-            'nama_barang' => 'required|string',
-            'harga' => 'required|numeric',
-            'ukuran' => 'required|string',
-            'status' => 'required|string',
-        ]);
+    public function updatedata($id){
 
-        // Simpan data baru ke dalam database menggunakan model
-        Barang::create($validatedData);
+        $data = Barang::find($id);
+        //dd($data);
+        return view('barang.updatedatabarang', compact('data'));
 
-        // Redirect ke halaman yang sesuai setelah data berhasil disimpan
-        return redirect()->route('page.barang.tabelbarang');
     }
+
+    public function editdata(Request $request, $id){
+
+        $data = Barang::find($id);
+        //dd($data);
+        $data->update($request->all());
+        return redirect()->route('tambahdatabarang')->with('success', 'Data berhasil di update');
+
+    }
+    
+
 
 }

@@ -41,16 +41,12 @@ Route::group(['prefix' => 'dashboard/admin'], function () {
             Route::match(['get','post'],'{id}/ubah', 'ubahAkun')->name('edit');
             Route::delete('{id}/hapus', 'hapusAkun')->name('delete');
     });
-
-    Route::controller(BarangController::class)
-        ->prefix('barang')
-        ->as('barang.')
-        ->group(function () {
-            Route::get('/', 'index')->name('index');
-            Route::get('/lihatbarang', [BarangController::class, 'index'])->name('lihatbarang');
-            Route::post('/insertdata', [BarangController::class, 'insertdata'])->name('insertdata');
-            Route::post('/tambahdatabarang', [BarangController::class, 'tambahdatabarang'])->name('tambahdatabarang');
-    });
-
-    
 });
+
+Route::get('/lihatbarang', [BarangController::class, 'index'])->name('lihatbarang');
+Route::post('/insertdata', [BarangController::class, 'insertdata'])->name('insertdata');
+Route::get('/tambahdatabarang', [BarangController::class, 'tambahdatabarang'])->name('tambahdatabarang');
+
+Route::get('/updatedata/{id}', [BarangController::class, 'updatedata'])->name('updatedata');
+Route::post('/editdata/{id}', [BarangController::class, 'editdata'])->name('editdata');
+
