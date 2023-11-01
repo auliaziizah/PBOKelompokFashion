@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class BarangController extends Controller
 {
@@ -16,11 +17,14 @@ class BarangController extends Controller
     }
 
     public function insertdata(Request $request){
-        $data = Barang::create($request->all());
-        
-        // Mengambil ID pengguna yang baru saja dibuat
-        $dataId = $data->id;
-        return redirect()->route('barang.tambahdatabarang', ['id' => $dataId])->with('success', 'Data Berhasil di Simpan');
+        try {
+            $data = Barang::create($request->all());
+            $dataId = $data->id;
+            return redirect()->route('barang.tambahdatabarang', ['id' => $dataId])->with('success', 'Data Berhasil di Simpan');
+        } catch (\Exception $e) {
+            Log::error('Gagal menyimpan data: ' . $e->getMessage());
+            return redirect()->route('barang.tambahdatabarang')->with('error', 'Terjadi kesalahan saat menyimpan data');
+        }
     }
 
     public function store(Request $request)
@@ -46,22 +50,27 @@ class BarangController extends Controller
     public function updatedata($id){
 
         $data = Barang::find($id);
-        //dd($data);
         return view('page.barang.updatedatabarang', compact('data'));
     }
 
     public function editdata(Request $request, $id){
-
-        $data = Barang::find($id);
-        //dd($data);
-        $data->update($request->all());
-        return redirect()->route('barang.tambahdatabarang')->with('success', 'Data berhasil di update');
-
+        try {
+            $data = Barang::find($id);
+            $data->update($request->all());
+            return redirect()->route('barang.tambahdatabarang')->with('success', 'Data berhasil di update');
+        } catch (\Exception $e) {
+            Log::error('Gagal mengupdate data: ' . $e->getMessage());
+            return redirect()->route('barang.tambahdatabarang')->with('error', 'Terjadi kesalahan saat mengupdate data');
+        }
     }
 
     public function hapusdata(Request $request, $id) {
-        Barang::destroy($id);
-        return redirect()->route('barang.index')->with('flash_message', 'Item dihapus');
+        try {
+            Barang::destroy($id);
+            return redirect()->route('barang.index')->with('flash_message', 'Item dihapus');
+        } catch (\Exception $e) {
+            Log::error('Gagal menghapus data: ' . $e->getMessage());
+            return redirect()->route('barang.index')->with('error', 'Terjadi kesalahan saat menghapus data');
+        }
     }
-    
 }
