@@ -59,7 +59,7 @@
                 <input type="text" name="deskripsi" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $data->deskripsi }}">
               </div>
               <button class="btn btn-info" type="submit">Submit</button>
-              <a href="{{ route('barang.index') }}" class="btn btn-success">Data</a>
+              <a href="{{ route('barang.index') }}" class="btn btn-success">Kembali</a>
             </form>
           </div>
         </div>
