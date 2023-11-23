@@ -54,7 +54,7 @@
         </div>
         <div class="card-body p-0" style="margin: 20px">
             <table
-                id="previewAkun"
+                id="barang"
                 class="table table-bordered yajra-datatable"
                 style="width:100%">
                 <thead>
@@ -86,7 +86,7 @@
 <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        $('.yajra-datatable').DataTable({
+        $('#barang').DataTable({
             processing: true,
             serverSide: true,
             ajax: {
