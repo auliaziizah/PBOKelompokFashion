@@ -40,14 +40,28 @@
                 <label for="exampleInputEmail1" class="form-label">Nama Barang</label>
                 <input type="text" name="nama_barang" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
               </div>
+              <div>
+                <img src="path/to/profile-image.jpg">
+                <label for="image">Masukkan Gambar:</label>
+                <input type="file" name="image" class="form-label" id="image">
+              </div>
               <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Harga</label>
                 <input type="number" name="harga" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
               </div>
               <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Ukuran</label>
-                <input type="text" name="ukuran" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-              </div>
+                <label for="exampleSelect" class="form-label">Ukuran</label>
+                <select name="ukuran" class="form-control" id="exampleSelect">
+                    <option value="" disabled selected>Pilih ukuran</option>
+                    <option value="s">XS</option>
+                    <option value="s">S</option>
+                    <option value="s">S</option>
+                    <option value="m">M</option>
+                    <option value="l">L</option>
+                    <option value="xl">XL</option>
+                    <option value="s">XXL</option>
+                </select>
+            </div>
               <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Bahan</label>
                 <input type="text" name="bahan" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">

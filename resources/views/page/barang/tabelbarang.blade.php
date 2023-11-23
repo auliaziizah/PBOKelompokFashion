@@ -59,15 +59,16 @@
                 style="width:100%">
                 <thead>
                     <tr>
-                        <th>No</th>
-                        <th>Nama Barang</th>
-                        <th>Harga</th>
-                        <th>Ukuran</th>
-                        <th>Bahan</th>
-                        <th>Brand</th>
-                        <th>Stok</th>
-                        <th>Deskripsi</th>
-                        <th>Action</th>
+                        <th scope="col">No</th>
+                        <th scope="col">Nama Barang</th>
+                        <th scope="col">Gambar</th>
+                        <th scope="col">Harga</th>
+                        <th scope="col">Ukuran</th>
+                        <th scope="col">Bahan</th>
+                        <th scope="col">Brand</th>
+                        <th scope="col">Stok</th>
+                        <th scope="col">Deskripsi</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -96,6 +97,7 @@
             columns: [
                 { data: 'DT_RowIndex', name: 'DT_RowIndex' },
                 { data: 'nama_barang', name: 'nama_barang' },
+                { data: 'image', name: 'image' },
                 { data: 'harga', name: 'harga' },
                 { data: 'ukuran', name: 'ukuran' },
                 { data: 'bahan', name: 'bahan' },

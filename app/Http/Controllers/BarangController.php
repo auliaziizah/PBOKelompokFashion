@@ -24,6 +24,19 @@ class BarangController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
+
+        $data = Barang::create($request->all());
+
+        if ($request->hasFile('image')) {
+            $request->file('image')->move('fotoprofil/', $request->file('image')->getClientOriginalName());
+            $data->image = $request->file('image')->getClientOriginalName();
+            $data->save();
+        }
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('fotoprofil', 'public');
+        }
+
         return view('page.barang.tabelbarang');
     }
 
