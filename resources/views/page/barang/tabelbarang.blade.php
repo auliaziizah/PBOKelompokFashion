@@ -59,15 +59,15 @@
                 style="width:100%">
                 <thead>
                     <tr>
-                        <th scope="col">No</th>
-                        <th scope="col">Nama Barang</th>
-                        <th scope="col">Harga</th>
-                        <th scope="col">Ukuran</th>
-                        <th scope="col">Bahan</th>
-                        <th scope="col">Brand</th>
-                        <th scope="col">Stok</th>
-                        <th scope="col">Deskripsi</th>
-                        <th scope="col">Action</th>
+                        <th>No</th>
+                        <th>Nama Barang</th>
+                        <th>Harga</th>
+                        <th>Ukuran</th>
+                        <th>Bahan</th>
+                        <th>Brand</th>
+                        <th>Stok</th>
+                        <th>Deskripsi</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
