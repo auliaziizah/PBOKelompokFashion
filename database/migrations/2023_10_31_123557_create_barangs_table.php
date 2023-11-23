@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('barangs', function (Blueprint $table) {
             $table->id();
             $table->string('nama_barang');
+            $table->string('image')->nullable();
+            $table->text('image_path')->nullable();
             $table->bigInteger('harga');
             $table->string('ukuran');
             $table->string('bahan');

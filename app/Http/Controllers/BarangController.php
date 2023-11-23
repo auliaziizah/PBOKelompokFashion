@@ -5,13 +5,41 @@ namespace App\Http\Controllers;
 use App\Models\Barang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use DataTables;
 
 class BarangController extends Controller
 {
-    public function index(){
-        $data = Barang::all();
-        return view('page.barang.tabelbarang', compact('data'));
+    public function index(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Barang::latest()->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $actionBtn = '<a href="'.route('barang.hapusdata', ['id' => $row->id]).'" class="btn btn-danger">Delete</a>
+                            <a href="'.route('barang.updatedata', ['id' => $row->id]).'" class="btn btn-info">Edit</a>';
+                return $actionBtn;
+
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
+        $data = Barang::create($request->all());
+
+        if ($request->hasFile('image')) {
+            $request->file('image')->move('fotoprofil/', $request->file('image')->getClientOriginalName());
+            $data->image = $request->file('image')->getClientOriginalName();
+            $data->save();
+        }
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('fotoprofil', 'public');
+        }
+
+        return view('page.barang.tabelbarang');
     }
+
     public function tambahdatabarang(){
         return view('page.barang.databarang');
     }
