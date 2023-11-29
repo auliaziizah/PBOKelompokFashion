@@ -1,4 +1,4 @@
-@extends('layouts.base_admin.base_dashboard')@section('judul', 'List Akun')
+@extends('layouts.base_admin.base_dashboard') @section('judul', 'List Akun')
 @section('script_head')
 <link
     rel="stylesheet"
@@ -52,6 +52,7 @@
                 </button>
             </div>
         </div>
+        <div class="mb-3"><a class="btn btn-primary" href="{{ route('barang.export.excel') }}">Download</a>
         <div class="card-body p-0" style="margin: 20px">
             <table
                 id="barang"
@@ -61,7 +62,6 @@
                     <tr>
                         <th scope="col">No</th>
                         <th scope="col">Nama Barang</th>
-                        <th scope="col">Gambar</th>
                         <th scope="col">Harga</th>
                         <th scope="col">Ukuran</th>
                         <th scope="col">Bahan</th>
@@ -79,7 +79,9 @@
     <!-- /.card -->
 
 </section>
-@endsection @section('script_footer')
+
+@endsection
+@section('script_footer')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
@@ -97,15 +99,6 @@
             columns: [
                 { data: 'DT_RowIndex', name: 'DT_RowIndex' },
                 { data: 'nama_barang', name: 'nama_barang' },
-                { 
-                data: 'gambar',
-                name: 'gambar',
-                render: function(data, type, full, meta) {
-                    var imagePath = '/fotobarang/' + data;
-                    console.log('Image Path:', imagePath); // Check the generated image path in the console
-                    return '<img src="' + imagePath + '" height="50" />';
-                }
-                },
                 { data: 'harga', name: 'harga' },
                 { data: 'ukuran', name: 'ukuran' },
                 { data: 'bahan', name: 'bahan' },

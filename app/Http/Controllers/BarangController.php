@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use DataTables;
 use App\Models\Barang;
 use Illuminate\Http\Request;
+use App\Exports\ExportBarang;
 use Illuminate\Support\Facades\Log;
-use DataTables;
+use Maatwebsite\Excel\Facades\Excel;
 
 class BarangController extends Controller
 {
@@ -25,8 +27,13 @@ class BarangController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
+        $data = Barang::orderBy('nama_barang', 'asc')->get();
 
-        return view('page.barang.tabelbarang');
+        return view('page.barang.tabelbarang', compact('data'));
+    }
+
+    function export_excel(){
+        return Excel::download(new ExportBarang, "Barang1.xlsx");
     }
 
     public function tambahdatabarang(){

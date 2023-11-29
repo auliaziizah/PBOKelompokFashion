@@ -53,6 +53,8 @@ Route::group(['prefix' => 'dashboard/admin'], function () {
             Route::get('/updatedata/{id}', [BarangController::class, 'updatedata'])->name('updatedata');
             Route::post('/editdata/{id}', [BarangController::class, 'editdata'])->name('editdata');
             Route::get('/hapusdata/{id}', [BarangController::class, 'hapusdata'])->name('hapusdata');
+
+            Route::get('/export/excel', [BarangController::class, 'export_excel'])->name('export.excel');
     });
 
     
