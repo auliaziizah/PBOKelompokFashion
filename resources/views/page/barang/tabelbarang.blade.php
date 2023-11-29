@@ -97,7 +97,15 @@
             columns: [
                 { data: 'DT_RowIndex', name: 'DT_RowIndex' },
                 { data: 'nama_barang', name: 'nama_barang' },
-                { data: 'image', name: 'image' },
+                { 
+                data: 'gambar',
+                name: 'gambar',
+                render: function(data, type, full, meta) {
+                    var imagePath = '/fotobarang/' + data;
+                    console.log('Image Path:', imagePath); // Check the generated image path in the console
+                    return '<img src="' + imagePath + '" height="50" />';
+                }
+                },
                 { data: 'harga', name: 'harga' },
                 { data: 'ukuran', name: 'ukuran' },
                 { data: 'bahan', name: 'bahan' },

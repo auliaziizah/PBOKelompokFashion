@@ -11,6 +11,7 @@ class BarangController extends Controller
 {
     public function index(Request $request)
     {
+        
         if ($request->ajax()) {
             $data = Barang::latest()->get();
             return Datatables::of($data)
@@ -25,17 +26,6 @@ class BarangController extends Controller
                 ->make(true);
         }
 
-
-        if ($request->hasFile('image')) {
-            $request->file('image')->move('fotoprofil/', $request->file('image')->getClientOriginalName());
-            $data->image = $request->file('image')->getClientOriginalName();
-            $data->save();
-        }
-
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('fotoprofil', 'public');
-        }
-
         return view('page.barang.tabelbarang');
     }
 
@@ -44,9 +34,23 @@ class BarangController extends Controller
     }
 
     public function insertdata(Request $request){
+
+        $data = Barang::create($request->all());
         try {
-            $data = Barang::create($request->all());
+            
             $dataId = $data->id;
+            
+            if ($request->hasFile('gambar')) {
+                $request->file('gambar')->move('fotoprofil/', $request->file('gambar')->getClientOriginalName());
+                $data->gambar = $request->file('gambar')->getClientOriginalName();
+                $data->save();
+            }
+
+            if ($request->hasFile('image')) {
+                $imagePath = $request->file('image')->store('fotoprofil', 'public');
+            }
+
+
             return redirect()->route('barang.tambahdatabarang', ['id' => $dataId])->with('success', 'Data Berhasil di Simpan');
         } catch (\Exception $e) {
             Log::error('Gagal menyimpan data: ' . $e->getMessage());
