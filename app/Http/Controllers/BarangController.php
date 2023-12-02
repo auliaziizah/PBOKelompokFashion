@@ -2,62 +2,51 @@
 
 namespace App\Http\Controllers;
 
-use DataTables;
 use App\Models\Barang;
 use Illuminate\Http\Request;
-use App\Exports\ExportBarang;
 use Illuminate\Support\Facades\Log;
+use DataTables;
+use PhpOffice\PhpWord\PhpWord;
+use PhpOffice\PhpWord\IOFactory;
+use Illuminate\Support\Facades\Storage;
+use App\Exports\BarangExport;
 use Maatwebsite\Excel\Facades\Excel;
 
 class BarangController extends Controller
 {
-    public function index(Request $request)
-    {
-        
+    public function index(Request $request){
         if ($request->ajax()) {
             $data = Barang::latest()->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="'.route('barang.hapusdata', ['id' => $row->id]).'" class="btn btn-danger">Delete</a>
-                            <a href="'.route('barang.updatedata', ['id' => $row->id]).'" class="btn btn-info">Edit</a>';
-                return $actionBtn;
+                    $deleteUrl = route('barang.hapusdata', ['id' => $row->id]);
+                    $editUrl = route('barang.updatedata', ['id' => $row->id]);
 
+                    $deleteBtn = '<a href="' . $deleteUrl . '" class="btn btn-danger">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>';
+
+                    $editBtn = '<a href="' . $editUrl . '" class="btn btn-info">
+                                    <i class="fas fa-edit"></i>
+                                </a>';
+
+                    return $deleteBtn . ' ' . $editBtn;
                 })
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        $data = Barang::orderBy('nama_barang', 'asc')->get();
 
-        return view('page.barang.tabelbarang', compact('data'));
+        return view('page.barang.tabelbarang');
     }
-
-    function export_excel(){
-        return Excel::download(new ExportBarang, "Barang1.xlsx");
-    }
-
     public function tambahdatabarang(){
         return view('page.barang.databarang');
     }
 
     public function insertdata(Request $request){
-
-        $data = Barang::create($request->all());
         try {
-            
+            $data = Barang::create($request->all());
             $dataId = $data->id;
-            
-            if ($request->hasFile('gambar')) {
-                $request->file('gambar')->move('fotoprofil/', $request->file('gambar')->getClientOriginalName());
-                $data->gambar = $request->file('gambar')->getClientOriginalName();
-                $data->save();
-            }
-
-            if ($request->hasFile('image')) {
-                $imagePath = $request->file('image')->store('fotoprofil', 'public');
-            }
-
-
             return redirect()->route('barang.tambahdatabarang', ['id' => $dataId])->with('success', 'Data Berhasil di Simpan');
         } catch (\Exception $e) {
             Log::error('Gagal menyimpan data: ' . $e->getMessage());
@@ -95,10 +84,10 @@ class BarangController extends Controller
         try {
             $data = Barang::find($id);
             $data->update($request->all());
-            return redirect()->route('barang.tambahdatabarang')->with('success', 'Data berhasil di update');
+            return redirect()->route('barang.lihatbarang')->with('success', 'Data berhasil di update');
         } catch (\Exception $e) {
             Log::error('Gagal mengupdate data: ' . $e->getMessage());
-            return redirect()->route('barang.tambahdatabarang')->with('error', 'Terjadi kesalahan saat mengupdate data');
+            return redirect()->route('barang.lihatbarang')->with('error', 'Terjadi kesalahan saat mengupdate data');
         }
     }
 
@@ -110,5 +99,9 @@ class BarangController extends Controller
             Log::error('Gagal menghapus data: ' . $e->getMessage());
             return redirect()->route('barang.index')->with('error', 'Terjadi kesalahan saat menghapus data');
         }
+    }
+
+    public function export(){
+        return Excel::download(new BarangExport, 'barang.xlsx');
     }
 }

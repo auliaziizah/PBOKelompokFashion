@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BarangController;
-
+use App\Http\Controllers\TransaksiController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -53,9 +53,19 @@ Route::group(['prefix' => 'dashboard/admin'], function () {
             Route::get('/updatedata/{id}', [BarangController::class, 'updatedata'])->name('updatedata');
             Route::post('/editdata/{id}', [BarangController::class, 'editdata'])->name('editdata');
             Route::get('/hapusdata/{id}', [BarangController::class, 'hapusdata'])->name('hapusdata');
-
-            Route::get('/export/excel', [BarangController::class, 'export_excel'])->name('export.excel');
+            Route::get('/export', [BarangController::class, 'export'])->name('export');
     });
 
-    
+    Route::controller(TransaksiController::class)
+        ->prefix('transaksi')
+        ->as('transaksi.')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/read', [TransaksiController::class, 'index'])->name('lihatbarang');
+            Route::post('/store', [TransaksiController::class, 'store'])->name('store');
+            Route::get('/create', [TransaksiController::class, 'create'])->name('create');
+            Route::delete('/delete/{id}', [TransaksiController::class, 'delete'])->name('delete');
+            Route::get('/list', [TransaksiController::class,'list'])->name('list');
+            Route::get('/download', [TransaksiController::class,'download'])->name('download');
+    });
 });

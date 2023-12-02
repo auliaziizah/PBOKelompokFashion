@@ -12,24 +12,24 @@ $links = [
         "is_multi" => true,
         "href" => [
             [
-                "section_text" => "Data Akun",
-                "section_icon" => "far fa-circle",
-                "section_href" => route('akun.index')
-            ],
-            [
                 "section_text" => "Tambah Akun",
                 "section_icon" => "far fa-circle",
                 "section_href" => route('akun.add')
+            ],
+            [
+                "section_text" => "Tabel Akun",
+                "section_icon" => "far fa-circle",
+                "section_href" => route('akun.index')
             ]
         ]
     ],
     [
-        "text" => "Data Barang",
+        "text" => "Kelola Barang",
         "icon" => "fas fa-users",
         "is_multi" => true,
         "href" => [
             [
-                "section_text" => "Data Barang",
+                "section_text" => "Tambah Barang",
                 "section_icon" => "far fa-circle",
                 "section_href" => route('barang.tambahdatabarang')
 
@@ -38,6 +38,24 @@ $links = [
                 "section_text" => "Tabel Barang",
                 "section_icon" => "far fa-circle",
                 "section_href" => route('barang.index')
+            ]
+        ]
+    ],
+    [
+        "text" => "Pesan Pakaian",
+        "icon" => "fas fa-users",
+        "is_multi" => true,
+        "href" => [
+            [
+                "section_text" => "Tambah Transaksi",
+                "section_icon" => "far fa-circle",
+                "section_href" => route('transaksi.create')
+
+            ],
+            [
+                "section_text" => "Tabel Transaksi",
+                "section_icon" => "far fa-circle",
+                "section_href" => route('transaksi.index')
             ]
         ]
     ]
@@ -49,7 +67,7 @@ $navigation_links = json_decode(json_encode($links));
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
       <img src="{{ asset('vendor/adminlte3/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+      <span class="brand-text font-weight-light">ClothChic</span>
     </a>
 
     <!-- Sidebar -->
