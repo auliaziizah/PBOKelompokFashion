@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\barang::factory(1000)->create();
         $this->call([
             BarangSeeder::class,
+            UserSeeder::class,
         ]);
     }
 }

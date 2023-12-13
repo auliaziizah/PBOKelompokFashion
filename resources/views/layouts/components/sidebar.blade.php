@@ -10,7 +10,7 @@ $sidebarItems = [
         "text" => "Kelola Akun",
         "icon" => "fas fa-shopping-cart",
         "href" => route('akun.index'),
-        "cannot" => 'admin'
+        "can" => 'admin'
     ],
     [
         "text" => "Kelola Barang",
