@@ -8,22 +8,9 @@ $sidebarItems = [
     ],
     [
         "text" => "Kelola Akun",
-        "icon" => "fas fa-users",
-        "can" => 'admin',
-        "items" => [
-            [
-                "text" => "Tambah Akun",
-                "icon" => "far fa-circle",
-                "href" => route('akun.add'),
-                "can" => 'admin'
-            ],
-            [
-                "text" => "Tabel Akun",
-                "icon" => "far fa-circle",
-                "href" => route('akun.index'),
-                "can" => 'admin'
-            ]
-        ]
+        "icon" => "fas fa-shopping-cart",
+        "href" => route('akun.index'),
+        "cannot" => 'admin'
     ],
     [
         "text" => "Kelola Barang",
