@@ -1,8 +1,6 @@
-<!-- resources/views/transaksi/tambah_transaksi.blade.php -->
 @extends('layouts.base_admin.base_dashboard') 
 @section('css')
 @endsection
-
 @section('content')
 <section class="content-header">
     <div class="container-fluid">
@@ -36,7 +34,7 @@
             <div class="col-8">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{ route('transaksi.store') }}">
+                        <form id="transaksiForm" method="POST" action="{{ route('transaksi.store') }}">
                             @csrf
                             <div class="row">
                                 <div class="col-md-6 col-12">
@@ -77,7 +75,6 @@
                                             </tr>
                                         </thead>
                                         <tbody class="transaksiItem">
-                                             
                                         </tbody>
                                         <tfoot>
                                             <tr>
@@ -105,9 +102,9 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <input type="hidden" name="total_harga" value="0">
-                                    <input type="hidden" name="jumlah_uang" id="jumlah_uang_hidden" value="">
+                                    <input type="hidden" name="jumlah_bayar" id="jumlah_bayar" value="">
                                     <input type="hidden" name="kembalian" id="kembalian_hidden" value="">
-                                    <button class="btn btn-success" onclick="bayar()">Bayar</button>
+                                    <button class="btn btn-success" type="button" onclick="bayar()">Bayar</button>
                                 </div>
                             </div>
                         </form>
@@ -118,6 +115,7 @@
     </div>
 </section>
 
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     var listItem = [];
     var totalHarga = 0;
@@ -126,12 +124,6 @@
     var kembalian = 0;
 
     function number_format(number, decimals, dec_point, thousands_sep) {
-        // Format angka dengan memisahkan ribuan dan desimal
-        // number: Angka yang akan diformat
-        // decimals: Jumlah desimal (opsional, default: 2)
-        // dec_point: Pemisah desimal (opsional, default: '.')
-        // thousands_sep: Pemisah ribuan (opsional, default: ',')
-
         number = (number + '').replace(/[^0-9+\-Ee.]/g, '');
         decimals = decimals || 2;
         dec_point = dec_point || '.';
@@ -155,9 +147,13 @@
     }
 
     function tambahItem() {
-        var selectedId = $('#id_daftar').find(':selected').data('id');
-        var nama = $('#id_daftar').find(':selected').data('nama_barang');
-        var harga = parseFloat($('#id_daftar').find(':selected').data('harga').replace(/[^\d.-]/g, ''));
+        console.log('Button clicked');
+        var selectedOption = $('#id_daftar :selected');
+        console.log('Selected Option Data:', selectedOption.data());
+        console.log('Harga Data Type:', typeof selectedOption.data('harga'));
+        var selectedId = selectedOption.data('id');
+        var nama = selectedOption.data('nama_barang');
+        var harga = parseFloat(selectedOption.data('harga'));
 
         var existingItem = listItem.find(item => item.id === selectedId);
 
@@ -263,9 +259,10 @@
             // Submit the form
             $('#transaksiForm').submit();
         } else {
-            // Show an alert if 'Jumlah Uang' is less than 'Total Harga'
             alert("Jumlah Uang harus lebih besar atau sama dengan Total Harga");
+            updateJumlahUang(-jumlahUangInput);
         }
     }
-    </script>
+    updateTable();
+</script>
 @endsection

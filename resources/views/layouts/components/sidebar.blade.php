@@ -13,6 +13,12 @@ $sidebarItems = [
         "can" => 'admin'
     ],
     [
+        "text" => "Kelola Transaksi",
+        "icon" => "fas fa-money-bill-wave-alt",
+        "href" => route('transaksi.index'),
+        "can" => 'admin'
+    ],
+    [
         "text" => "Kelola Barang",
         "icon" => "fas fa-tshirt",
         "can" => 'admin',
@@ -30,12 +36,6 @@ $sidebarItems = [
                 "can" => 'admin'
             ]
         ]
-    ],
-    [
-        "text" => "Kelola Transaksi",
-        "icon" => "fas fa-money-bill-wave-alt",
-        "href" => route('transaksi.index'),
-        "can" => 'admin'
     ],
     [
         "text" => "Tambah Transaksi",
