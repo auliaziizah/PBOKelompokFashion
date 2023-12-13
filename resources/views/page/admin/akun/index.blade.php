@@ -59,7 +59,6 @@
                     <tr>
                         <th>Nama</th>
                         <th>Email</th>
-                        <th>Foto</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -96,8 +95,6 @@
                             "data": "name"
                         }, {
                             "data": "email"
-                        }, {
-                            "data": "user_image"
                         }, {
                             "data": "options"
                         }

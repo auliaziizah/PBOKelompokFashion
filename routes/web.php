@@ -23,37 +23,39 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::group(['prefix' => 'dashboard/admin'], function () {
+Route::group(['prefix' => 'dashboard/admin', 'middleware' => 'auth'], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
-    Route::group(['prefix' => 'profile'], function () {
+    Route::group(['prefix' => 'profile', 'middleware' => 'admin'], function () {
         Route::get('/', [HomeController::class, 'profile'])->name('profile');
         Route::post('update', [HomeController::class, 'updateprofile'])->name('profile.update');
     });
 
-    Route::controller(AkunController::class)
-        ->prefix('akun')
-        ->as('akun.')
-        ->group(function () {
-            Route::get('/', 'index')->name('index');
-            Route::post('showdata', 'dataTable')->name('dataTable');
-            Route::match(['get','post'],'tambah', 'tambahAkun')->name('add');
-            Route::match(['get','post'],'{id}/ubah', 'ubahAkun')->name('edit');
-            Route::delete('{id}/hapus', 'hapusAkun')->name('delete');
-    });
+    Route::middleware(['admin'])->group(function () {
+        Route::controller(AkunController::class)
+            ->prefix('akun')
+            ->as('akun.')
+            ->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::post('showdata', 'dataTable')->name('dataTable');
+                Route::match(['get','post'],'tambah', 'tambahAkun')->name('add');
+                Route::match(['get','post'],'{id}/ubah', 'ubahAkun')->name('edit');
+                Route::delete('{id}/hapus', 'hapusAkun')->name('delete');
+        });
 
-    Route::controller(BarangController::class)
-        ->prefix('barang')
-        ->as('barang.')
-        ->group(function () {
-            Route::get('/', 'index')->name('index');
-            Route::get('/lihatbarang', [BarangController::class, 'index'])->name('lihatbarang');
-            Route::post('/insertdata', [BarangController::class, 'insertdata'])->name('insertdata');
-            Route::get('/tambahdatabarang', [BarangController::class, 'tambahdatabarang'])->name('tambahdatabarang');
-            Route::get('/updatedata/{id}', [BarangController::class, 'updatedata'])->name('updatedata');
-            Route::post('/editdata/{id}', [BarangController::class, 'editdata'])->name('editdata');
-            Route::get('/hapusdata/{id}', [BarangController::class, 'hapusdata'])->name('hapusdata');
-            Route::get('/export', [BarangController::class, 'export'])->name('export');
+        Route::controller(BarangController::class)
+            ->prefix('barang')
+            ->as('barang.')
+            ->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::get('/lihatbarang', [BarangController::class, 'index'])->name('lihatbarang');
+                Route::post('/insertdata', [BarangController::class, 'insertdata'])->name('insertdata');
+                Route::get('/tambahdatabarang', [BarangController::class, 'tambahdatabarang'])->name('tambahdatabarang');
+                Route::get('/updatedata/{id}', [BarangController::class, 'updatedata'])->name('updatedata');
+                Route::post('/editdata/{id}', [BarangController::class, 'editdata'])->name('editdata');
+                Route::get('/hapusdata/{id}', [BarangController::class, 'hapusdata'])->name('hapusdata');
+                Route::get('/export', [BarangController::class, 'export'])->name('export');
+        });
     });
 
     Route::controller(TransaksiController::class)
